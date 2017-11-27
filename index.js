@@ -6,6 +6,7 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { LinkContainer, panelCSS } from 'styles/loginStyles';
 import { postLogin } from './actions';
+import { logoutUser } from 'containers/App/actions';
 import { makeSelectFieldData, makeSelectLoginSuccessful, makeSelectLoginError } from './selectors';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
@@ -18,6 +19,17 @@ import Button from 'components/Button';
 import Panel from 'components/Panel';
 
 export class LoginPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
+  componentDidMount() {    
+    this.props.onMount();
+  }
+
+  componentWillReceiveProps(nextProps) {   
+    if (true === nextProps.loginSuccessful) {       
+      this.props.history.push('/')
+    }
+  }
+
 
   render() {   
     return (
@@ -74,6 +86,7 @@ LoginPage.defaultProps = {
 
 export const mapDispatchToProps = (dispatch) => ({
   submitCallback: postLogin,
+  onMount: (endpoint) => dispatch(logoutUser()),
 });
 
 const mapStateToProps = createStructuredSelector({

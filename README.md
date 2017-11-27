@@ -57,3 +57,5 @@ If the login failed on the backend, the response should minimally look like:
   }
 
 Upon successful login, the saga will PUT a loginPosted action object expected to be defined in App/actions so that your app logic can handle it.
+
+Whenever the form is mounted, it dispatched a logout user event defined in the App containers action file. Therefore you must implement this method so that the user is automatically logged out whenever they visit the login page. This allows for very straightforward logic when logging out, as one only needs to provide the same link to the login page. The action dispatched is called `logoutUser`.
