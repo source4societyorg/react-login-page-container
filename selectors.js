@@ -1,17 +1,25 @@
-/**
- * Homepage selectors
- */
-
 import { createSelector } from 'reselect';
 
-const selectLoginPage = (state) => state.get('login');
+const selectLoginPage = (state) => state.get('loginPage');
 
-const makeSelectIsValid = createSelector(
+const makeSelectFieldData = () => createSelector(
+  selectLoginPage, 
+  (formState) => formState.get('fieldData')
+);
+
+const makeSelectLoginSuccessful = () => createSelector(
   selectLoginPage,
-  (loginPageState) => loginPageState.get('isValid')
+  (formState) => formState.get('loginSuccessful')
+);
+
+const makeSelectLoginError = () => createSelector(
+  selectLoginPage,
+  (formState) => formState.get('error')
 );
 
 export {
   selectLoginPage,
-  makeSelectIsValid,
+  makeSelectLoginSuccessful,
+  makeSelectFieldData,
+  makeSelectLoginError,
 };

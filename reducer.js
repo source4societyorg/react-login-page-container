@@ -4,10 +4,20 @@ import {
   LOGIN_POSTED,
 } from 'containers/App/constants';
 
+import {
+  LOGIN_POST_ERROR,
+} from './constants';
+
 const initialState = fromJS({
-  fieldData: { data: {}, errors: [], views: [] },
-  formValues: {},
-  isValid: false,
+  fieldData: { 
+    data: {
+      username: { widget: 'text' },
+      password: { widget: 'password' },
+    }, 
+    errors: [], 
+    views: [] 
+  },
+  loginSuccessful: false,
   error: {},
 });
 
@@ -16,9 +26,6 @@ function loginPageReducer(state = initialState, action) {
     case LOGIN_POST_ERROR:
       return state
         .set('error', action.error)
-    case LOGIN_POSTED:     
-      return state
-        .set('loginSuccessful', true)   
     default:
       return state;
   }
