@@ -8,7 +8,7 @@ import ApiInterface from 'utils/apiInterface';
 export function* postLoginData(action) { 
   if(action.isValid) {
       try {             
-        const result = yield call(apiInterface, action);
+        const result = yield call(apiInterface, 'login', action);
         if (!result.status) {
           throw result.error;
         }

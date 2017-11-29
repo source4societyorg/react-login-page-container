@@ -11,8 +11,8 @@ import {
 const initialState = fromJS({
   fieldData: { 
     data: {
-      username: { widget: 'text' },
-      password: { widget: 'password' },
+      username: { widget: 'text', },
+      password: { widget: 'password', },
     }, 
     errors: [], 
     views: [] 
