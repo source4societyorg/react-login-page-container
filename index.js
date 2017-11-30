@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { LinkContainer, panelCSS } from 'styles/loginStyles';
+import { LoginPageStyle, LinkContainer, panelCSS } from 'styles/loginStyles';
 import { postLogin } from './actions';
 import { logoutUser } from 'containers/App/actions';
 import { makeSelectFieldData, makeSelectLoginSuccessful, makeSelectLoginError } from './selectors';
@@ -32,7 +32,7 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
 
   render() {   
     return (
-      <div>
+      <LoginPageStyle>
           <ContentHeader text="Log In" />          
           <Paragraph>Please enter your username and password.</Paragraph>
           <Panel title="Account Information" panelCSS={panelCSS}>
@@ -48,7 +48,7 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
                 <Link to="/forgot-password">Forgot your username or password.</Link>
             </LinkContainer>
           </Panel>
-      </div>
+      </LoginPageStyle>
     );
   }
 }
