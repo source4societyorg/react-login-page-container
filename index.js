@@ -12,10 +12,8 @@ import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import reducer from './reducer';
 import saga from './saga';
-import ContentHeader from 'components/ContentHeader';
 import FormContainer from 'containers/FormContainer'; 
 import Paragraph from 'components/Paragraph';
-import Panel from 'components/Panel';
 
 export class LoginPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -33,9 +31,7 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
   render() {   
     return (
       <LoginPageStyle>
-          <ContentHeader text="Log In" />          
           <Paragraph>Please enter your username and password.</Paragraph>
-          <Panel title="Account Information" panelCSS={panelCSS}>
              <FormContainer
                 id={this.props.id}
                 labels={this.props.labels}
@@ -46,8 +42,7 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
             />
             <LinkContainer>
                 <Link to="/forgot-password">Forgot your username or password.</Link>
-            </LinkContainer>
-          </Panel>
+            </LinkContainer>        
       </LoginPageStyle>
     );
   }
