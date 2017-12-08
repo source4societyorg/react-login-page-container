@@ -7,32 +7,45 @@ import { createStructuredSelector } from 'reselect';
 import { LoginPageStyle, LinkContainer, panelCSS } from 'styles/loginStyles';
 import { postLogin } from './actions';
 import { logoutUser } from 'containers/App/actions';
-import { makeSelectFieldData, makeSelectLoginSuccessful, makeSelectLoginError } from './selectors';
+import { makeSelectFormValues } from 'containers/FormContainer/selectors';
+import { makeSelectFieldData, makeSelectLoginSuccessful, makeSelectLoginError, makeSelectRememberMe } from './selectors';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import reducer from './reducer';
 import saga from './saga';
 import FormContainer from 'containers/FormContainer'; 
+import ContentHeader from 'components/ContentHeader';
 import Paragraph from 'components/Paragraph';
-
+import Panel from 'components/Panel';
+import Alert from 'components/Alert';
+import labels from './labels';
+import Field from 'components/Form/Field';
 export class LoginPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   componentDidMount() {    
     this.props.onMount();
   }
 
-  componentWillReceiveProps(nextProps) {   
+  componentWillReceiveProps(nextProps) {      
     if (true === nextProps.loginSuccessful) {       
       this.props.history.push('/')
     }
-  }
+  } 
 
+  renderError(error) {  
+    return (
+      typeof error.get('message') === 'undefined' ? null : <Alert>{labels(error.get('message'))}</Alert>
+    )
+  }
 
   render() {   
     return (
       <LoginPageStyle>
+          <ContentHeader text="Log In" />          
+          {this.renderError(this.props.error)}
           <Paragraph>Please enter your username and password.</Paragraph>
-             <FormContainer
+          <Panel title="Account Information" panelCSS={panelCSS}>
+            <FormContainer
                 id={this.props.id}
                 labels={this.props.labels}
                 fieldData={this.props.fieldData}
@@ -40,10 +53,11 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
                 callbackAction={this.props.submitCallback}
                 submitLabel="Log In"
             />
-            <LinkContainer>
+              <LinkContainer>
                 <Link to="/forgot-password">Forgot your username or password.</Link>
-            </LinkContainer>        
-      </LoginPageStyle>
+            </LinkContainer>
+          </Panel>
+        </LoginPageStyle>
     );
   }
 }
@@ -58,10 +72,9 @@ LoginPage.propTypes = {
   error: PropTypes.object,
 };
 
-
 LoginPage.defaultProps = {
   id: 'login_form',
-  labels: ['Username', 'Password'],
+  labels: ['Username', 'Password', 'Keep me logged in'],
   validation: [
     [
       {
@@ -81,6 +94,7 @@ LoginPage.defaultProps = {
 export const mapDispatchToProps = (dispatch) => ({
   submitCallback: postLogin,
   onMount: (endpoint) => dispatch(logoutUser()),
+  toggleRememberMe: (evt) => dispatch(toggleRememberMe(evt.target.checked)),
 });
 
 const mapStateToProps = createStructuredSelector({
