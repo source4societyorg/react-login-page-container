@@ -5,6 +5,10 @@ import {
 } from 'containers/App/constants';
 
 import {
+  CHANGE_FIELD,
+} from 'containers/FormContainer/constants';
+
+import {
   LOGIN_POST_ERROR,
 } from './constants';
 
@@ -13,19 +17,28 @@ const initialState = fromJS({
     data: {
       username: { widget: 'text', },
       password: { widget: 'password', },
+      rememberMe: { widget: 'checkbox', layout: 'inline-block', },
     }, 
     errors: [], 
-    views: [] 
+    views: [], 
   },
-  loginSuccessful: false,
   error: {},
+  loginSuccessful: false,
+  submitEnabled: true,
+  rememberMe: false,
 });
 
 function loginPageReducer(state = initialState, action) {
   switch (action.type) {
-    case LOGIN_POST_ERROR:
+    case LOGIN_POSTED:     
       return state
-        .set('error', action.error)
+        .set('loginSuccessful', typeof action.jwt !== 'undefined' && action.jwt !== null)
+    case CHANGE_FIELD:
+      return state
+        .set('error', initialState.get('error'))
+    case LOGIN_POST_ERROR:         
+      return state
+        .set('error', fromJS(action.error))
     default:
       return state;
   }
