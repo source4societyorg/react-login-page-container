@@ -27,7 +27,7 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
   }
 
   componentWillReceiveProps(nextProps) {      
-    if (true === nextProps.loginSuccessful) {       
+    if (true === nextProps.loginSuccessful) { 
       this.props.history.push('/')
     }
   } 
