@@ -94,7 +94,6 @@ LoginPage.defaultProps = {
 export const mapDispatchToProps = (dispatch) => ({
   submitCallback: postLogin,
   onMount: (endpoint) => dispatch(logoutUser()),
-  toggleRememberMe: (evt) => dispatch(toggleRememberMe(evt.target.checked)),
 });
 
 const mapStateToProps = createStructuredSelector({

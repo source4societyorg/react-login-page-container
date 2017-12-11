@@ -17,10 +17,12 @@ const initialState = fromJS({
     data: {
       username: { widget: 'text', },
       password: { widget: 'password', },
-      rememberMe: { widget: 'checkbox', layout: 'inline-block', },
+      rememberMe: { widget: 'checkbox', layout: 'inline-block', checked: true, },
     }, 
     errors: [], 
-    views: [], 
+    views: {
+      rememberMe: { value: '', checked: true, isValid: true }
+    }, 
   },
   error: {},
   loginSuccessful: false,
