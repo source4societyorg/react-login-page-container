@@ -32,13 +32,18 @@ export function* postLoginData(action) {
         const expires = jwtClaims.expires || 0;
         const userRoles = jwtClaims.roles || [];
 
-        localStorage.setItem('jwt', jwt);
-        localStorage.setItem('username', username);
-        localStorage.setItem('expires', expires);
-        localStorage.setItem('userRoles', JSON.stringify(userRoles));
-        localStorage.setItem('jwtClaims', JSON.stringify(jwtClaims));
+        const rememberMe = action.formValues.getIn(['login_form', 'rememberMe', 'checked']);
+        if( rememberMe ) {
+          localStorage.setItem('jwt', jwt);
+          localStorage.setItem('username', username);
+          localStorage.setItem('expires', expires);
+          localStorage.setItem('userRoles', JSON.stringify(userRoles));
+          localStorage.setItem('jwtClaims', JSON.stringify(jwtClaims));
+        }
+
         yield put(loginPosted(jwt, userId, username, userRoles, expires, jwtClaims));
       } catch (err) { 
+        console.log(err);
         yield put(loginPostError({message: err.message || 'An unexpected error', type: 'alert'}));
       } 
   }
