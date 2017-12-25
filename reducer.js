@@ -15,9 +15,9 @@ import {
 const initialState = fromJS({
   fieldData: { 
     data: {
-      username: { widget: 'text', },
-      password: { widget: 'password', },
-      rememberMe: { widget: 'checkbox', layout: 'inline-block', checked: true, },
+      username: { widget: 'text', propertyOrder: 1,},
+      password: { widget: 'password', propertyOrder: 2,},
+      rememberMe: { widget: 'checkbox', layout: 'inline-block', checked: true, propertyOrder: 3},
     }, 
     errors: [], 
     views: {

@@ -53,7 +53,7 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
                 callbackAction={this.props.submitCallback}
                 submitLabel="Log In"
             />
-              <LinkContainer>
+            <LinkContainer>
                 <Link to="/forgot-password">Forgot your username or password.</Link>
             </LinkContainer>
           </Panel>
