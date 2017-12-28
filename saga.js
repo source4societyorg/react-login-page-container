@@ -43,7 +43,6 @@ export function* postLoginData(action) {
 
         yield put(loginPosted(jwt, userId, username, userRoles, expires, jwtClaims));
       } catch (err) { 
-        console.log(err);
         yield put(loginPostError({message: err.message || 'An unexpected error', type: 'alert'}));
       } 
   }
