@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { LoginPageStyle, LinkContainer, panelCSS } from 'styles/loginStyles';
+import { LoginPageStyle, LinkContainer } from 'styles/loginStyles';
 import { postLogin } from './actions';
 import { logoutUser } from 'containers/App/actions';
 import { makeSelectFormValues } from 'containers/FormContainer/selectors';
@@ -44,7 +44,7 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
           <ContentHeader text="Log In" />          
           {this.renderError(this.props.error)}
           <Paragraph>Please enter your username and password.</Paragraph>
-          <Panel title="Account Information" panelCSS={panelCSS}>
+          <Panel title="Account Information">
             <FormContainer
                 id={this.props.id}
                 labels={this.props.labels}
