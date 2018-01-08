@@ -27,10 +27,10 @@ export function* postLoginData(action) {
         }        
 
         const jwtClaims = jwt_decode(jwt);      
-        const userId = jwtClaims.userId || '';
+        const userId = jwtClaims.recordId || '';
         const username = jwtClaims.username || '';
         const expires = jwtClaims.expires || 0;
-        const userRoles = jwtClaims.roles || [];
+        const userRoles = jwtClaims.roles || [];        
 
         const rememberMe = action.formValues.getIn(['login_form', 'rememberMe', 'checked']);
         if( rememberMe ) {
@@ -38,6 +38,7 @@ export function* postLoginData(action) {
           localStorage.setItem('username', username);
           localStorage.setItem('expires', expires);
           localStorage.setItem('userRoles', JSON.stringify(userRoles));
+          localStorage.setItem('userId', JSON.stringify(userId));
           localStorage.setItem('jwtClaims', JSON.stringify(jwtClaims));
         }
 
